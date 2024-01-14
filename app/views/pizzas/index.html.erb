@@ -1,0 +1,10 @@
+<h1>Pizzas</h1>
+<p>All pizzas:</p>
+<ul>
+    <% @pizzas.each do |pizza| %>
+        <li>
+            <%= link_to pizza.name, pizza %>
+            <%=  pizza.unitPrice %>
+        </li>
+    <% end %>
+</ul>

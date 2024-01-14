@@ -1,0 +1,21 @@
+<%= form_with model: pizza do |form| %>
+    <div>
+      <%= form.label :name %><br>
+      <%= form.text_field :name %>
+      <% pizza.errors.full_messages_for(:name).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+  
+    <div>
+      <%= form.label :unitPrice %><br>
+      <%= form.text_field :unitPrice %>
+      <% pizza.errors.full_messages_for(:unitPrice).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+  
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
