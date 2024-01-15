@@ -14,7 +14,13 @@
         <div><%= message %></div>
       <% end %>
     </div>
-  
+
+    <h2>Ingrdients</h2>
+    <div class="field">
+      <%= form.label :ingredient_ids, "Ingredients" %>
+      <%= form.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name %>
+    </div>
+
     <div>
       <%= form.submit %>
     </div>

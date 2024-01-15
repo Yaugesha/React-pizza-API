@@ -1,0 +1,19 @@
+<h2>Ingredients</h2>
+  <ul>
+    <% @ingredients.each do |ingredient| %>
+        <li>
+            <%= ingredient.name %>
+        </li>
+    <% end %>
+</ul>
+
+<h2>Add ingredients:</h2>
+<%= form_with model: @ingredient do |form| %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </div>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
