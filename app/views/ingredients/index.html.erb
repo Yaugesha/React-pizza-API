@@ -3,17 +3,14 @@
     <% @ingredients.each do |ingredient| %>
         <li>
             <%= ingredient.name %>
+            <%= link_to "edit", edit_ingredient_path(ingredient) %>
+            <%= link_to "delete", ingredient_path(ingredient), data: {
+              turbo_method: :delete,
+              turbo_confirm: "Are you sure?"
+            } %>
         </li>
     <% end %>
 </ul>
 
 <h2>Add ingredients:</h2>
-<%= form_with model: @ingredient do |form| %>
-  <div>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
-  </div>
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+<%= render "form", ingredient: @ingredient %>
