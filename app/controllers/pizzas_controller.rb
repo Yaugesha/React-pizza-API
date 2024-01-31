@@ -6,6 +6,11 @@ class PizzasController < ApplicationController
   def show 
     # доступ к параметрам запроса происходит через хэш params
     @pizza = Pizza.find(params[:id])
+    ingredientsIds = Pizza.find(@pizza.id).pizzasIngredient
+    @ingredients = []
+    ingredientsIds.each do |ingredient|
+      @ingredients << Ingredient.find(ingredient.ingredient_id).name
+    end
   end
 
   def new
@@ -45,7 +50,7 @@ class PizzasController < ApplicationController
 
   private
     def pizza_params
-      params.require(:pizza).permit(:name, :unitPrice)
+      params.require(:pizza).permit(:name, :unitPrice, ingredient_ids: [])
     end
 
 end
