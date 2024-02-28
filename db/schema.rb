@@ -10,9 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_27_140540) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_28_091104) do
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "order_id", null: false
+    t.integer "pizza_id", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["pizza_id"], name: "index_order_items_on_pizza_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "estimatedDelivery"
+    t.boolean "priority"
+    t.float "priorityPrice"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
