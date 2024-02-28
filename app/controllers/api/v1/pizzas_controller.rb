@@ -1,11 +1,14 @@
-class PizzasController < ApplicationController
+class Api::V1::PizzasController < ApplicationController
   before_action :set_pizza, only: %i[ show update destroy ]
 
   # GET /pizzas
   def index
     @pizzas = Pizza.all
 
-    render json: @pizzas
+    render json: @pizzas.to_json(:except => [:created_at, :updated_at],
+                                 :include => {:ingredients => {
+                                              :only => [:id, :name]} }
+                                )
   end
 
   # GET /pizzas/1
