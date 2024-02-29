@@ -35,6 +35,9 @@ gem "bootsnap", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 gem "rack-cors"
 
+# Shim to load environment variables from .env into ENV in development.
+gem 'dotenv-rails', :groups => [:development, :test]
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
@@ -44,3 +47,5 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
+
+gem "jsonapi-serializer", "~> 2.2"

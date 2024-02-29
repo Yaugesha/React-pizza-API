@@ -5,15 +5,14 @@ class Api::V1::PizzasController < ApplicationController
   def index
     @pizzas = Pizza.all
 
-    render json: @pizzas.to_json(:except => [:created_at, :updated_at],
-                                 :include => {:ingredients => {
-                                              :only => [:id, :name]} }
-                                )
+    pizzas_arr = @pizzas.map{ |pizza| PizzaSerializer.new(pizza).serializable_hash[:data][:attributes] }
+
+    render json: pizzas_arr.to_json
   end
 
   # GET /pizzas/1
   def show
-    render json: @pizza
+    render json: PizzaSerializer.new(@pizza).serializable_hash[:data][:attributes]
   end
 
   # POST /pizzas
@@ -49,6 +48,6 @@ class Api::V1::PizzasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def pizza_params
-      params.require(:pizza).permit(:name, :unitPrice, :soldOut, :imageUrl)
+      params.require(:pizza).permit(:name, :unitPrice, :soldOut, :image)
     end
 end
