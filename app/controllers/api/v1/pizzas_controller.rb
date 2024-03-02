@@ -17,10 +17,17 @@ class Api::V1::PizzasController < ApplicationController
 
   # POST /pizzas
   def create
-    @pizza = Pizza.new(pizza_params)
+    ingredients_params =  JSON.parse(params[:pizza][:ingredients])
+    pizza_params_without_ingredients = pizza_params.except(:ingredients)
+
+    ingredients = ingredients_params.collect { |ingredient| Ingredient.find(ingredient["id"]) }
+
+    @pizza = Pizza.new(pizza_params_without_ingredients)
+
+    @pizza.ingredients << ingredients
 
     if @pizza.save
-      render json: @pizza, status: :created, location: @pizza
+      render json: PizzaSerializer.new(@pizza).serializable_hash[:data][:attributes], status: :created
     else
       render json: @pizza.errors, status: :unprocessable_entity
     end
@@ -48,6 +55,6 @@ class Api::V1::PizzasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def pizza_params
-      params.require(:pizza).permit(:name, :unitPrice, :soldOut, :image)
+      params.require(:pizza).permit(:name, :unitPrice, :soldOut, :image, ingredients: [:id, :name])
     end
 end

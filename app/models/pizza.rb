@@ -7,7 +7,7 @@ class Pizza < ApplicationRecord
 
   has_one_attached :image
 
-  def image_url # imageUrl
-    Rails.application.routes.url.helpers.url_to(image) if image.attached?
+  def imageUrl
+    Rails.application.routes.url_helpers.url_for(image) if image.attached?
   end
 end

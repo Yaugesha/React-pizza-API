@@ -5,7 +5,9 @@ class Api::V1::IngredientsController < ApplicationController
   def index
     @ingredients = Ingredient.all
 
-    render json: @ingredients
+    pizzas_arr = @ingredients.map{|ingredient| IngredientSerializer.new(ingredient).serializable_hash[:data][:attributes] }
+
+    render json: pizzas_arr.to_json
   end
 
   # GET /ingredients/1
