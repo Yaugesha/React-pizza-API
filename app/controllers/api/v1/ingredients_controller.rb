@@ -20,7 +20,7 @@ class Api::V1::IngredientsController < ApplicationController
     @ingredient = Ingredient.new(ingredient_params)
 
     if @ingredient.save
-      render json: @ingredient, status: :created, location: @ingredient
+      render json: IngredientSerializer.new(@ingredient).serializable_hash[:data][:attributes], status: :created
     else
       render json: @ingredient.errors, status: :unprocessable_entity
     end

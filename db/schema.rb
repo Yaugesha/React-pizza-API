@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_02_085711) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_03_190103) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -59,9 +59,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_02_085711) do
     t.string "estimatedDelivery"
     t.boolean "priority"
     t.float "priorityPrice"
-    t.string "status"
+    t.string "status", default: "Preparing"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "customer"
+    t.string "phone"
+    t.string "address"
   end
 
   create_table "pizza_ingredients", force: :cascade do |t|
