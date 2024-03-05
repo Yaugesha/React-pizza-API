@@ -42,6 +42,8 @@ class Api::V1::PizzasController < ApplicationController
   # DELETE /pizzas/1
   def destroy
     @pizza.destroy!
+
+    render json: { message: 'Successfully deleted' }, status: :ok
   end
 
   private

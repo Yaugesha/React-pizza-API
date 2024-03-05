@@ -18,6 +18,14 @@ class Api::V1::OrdersController < ApplicationController
     render json: OrderSerializer.new(@order).serializable_hash[:data][:attributes], status: :ok
   end
 
+  def index
+    @orders = Order.all
+    orders = @orders.map do |order|
+      OrderSerializer.new(order).serializable_hash[:data][:attributes]
+    end
+    render json: orders
+  end
+
 
   private
   def order_params
