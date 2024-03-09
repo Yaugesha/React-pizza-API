@@ -51,3 +51,5 @@ end
 gem "jsonapi-serializer", "~> 2.2"
 
 gem "devise", "~> 4.9"
+
+gem 'devise-jwt'

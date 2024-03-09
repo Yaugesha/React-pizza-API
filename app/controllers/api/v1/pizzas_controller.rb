@@ -1,5 +1,6 @@
 class Api::V1::PizzasController < ApplicationController
   before_action :set_pizza, only: %i[ show update destroy ]
+  before_action :authenticate_user!, only: %i[ show create update destroy ]
 
   # GET /pizzas
   def index
